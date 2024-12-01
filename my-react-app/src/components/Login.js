@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../Auth.css'; // 공통 스타일 파일 추가
 
 const Login = () => {
   const [user, setUser] = useState('');
@@ -14,9 +16,9 @@ const Login = () => {
       const foundUser = users.find(u => u.User === user && u.Password === password);
 
       if (foundUser) {
-        setMessage('로그인 성공!');
+        alert('로그인 성공!');
       } else {
-        setMessage('아이디 또는 비밀번호가 잘못되었습니다.');
+        alert('아이디 또는 비밀번호가 잘못되었습니다.');
       }
     } catch (error) {
       console.error('로그인 중 오류가 발생했습니다.', error);
@@ -25,26 +27,32 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="auth-container">
       <h2>로그인 페이지</h2>
-      <div>
+      <div className="auth-input-group">
         <input
           type="text"
-          placeholder="아이디"
+          placeholder="사용자"
           value={user}
           onChange={(e) => setUser(e.target.value)}
+          className="auth-input"
         />
       </div>
-      <div>
+      <div className="auth-input-group">
         <input
           type="password"
           placeholder="비밀번호"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="auth-input"
         />
       </div>
-      <button onClick={handleLogin}>로그인</button>
-      <p>{message}</p>
+      <button onClick={handleLogin} className="auth-button">로그인</button>
+      <p className="auth-message">{message}</p>
+      <div className="auth-footer">
+        <p>계정이 없으신가요?</p>
+        <Link to="/register" className="auth-link">회원가입</Link>
+      </div>
     </div>
   );
 };
