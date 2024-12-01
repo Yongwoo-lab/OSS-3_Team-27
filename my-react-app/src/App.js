@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Main from './components/Main';
 import Login from './pages/Login';
@@ -8,7 +8,7 @@ import Header from './components/Header';
 import { useState } from 'react';
 
 function App() {
-  // 지역 선택 및 검색 상태 관리
+  const location = useLocation(); // 현재 경로를 가져오는 훅
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -24,12 +24,19 @@ function App() {
     setSelectedRegion(null); // 지역 선택 초기화
   };
 
+  // Header를 숨길 경로 설정
+  const hideHeaderRoutes = ['/login', '/register'];
+
+  // 현재 경로가 Header를 숨길 경로에 포함되는지 확인
+  const shouldHideHeader = hideHeaderRoutes.some((route) => location.pathname.startsWith(route));
+
   return (
     <div className="App">
-      {/* Header 컴포넌트에 핸들러 전달 */}
-      <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
+      {/* 특정 경로에서 Header 숨김 */}
+      {!shouldHideHeader && (
+        <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
+      )}
       <Routes>
-        {/* Main 페이지에 선택된 지역 및 검색어 전달 */}
         <Route
           path="/"
           element={<Main selectedRegion={selectedRegion} searchQuery={searchQuery} />}
@@ -37,6 +44,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/list" element={<List />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/"element={<Main selectedRegion={selectedRegion} />}
+/>
       </Routes>
     </div>
   );
