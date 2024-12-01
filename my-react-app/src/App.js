@@ -1,16 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-<<<<<<< HEAD
-import Main from './pages/Main';
+import Main from './components/Main';
 import Login from './pages/Login';
+import Register from './components/Register';
 import List from './pages/List';
 import Header from './components/Header';
 import { useState } from 'react';
-=======
-import Main from './components/Main';
-import Login from './components/Login';
-import Register from './components/Register';
->>>>>>> ce8672e5c552ab7e5a9dccd82a542391759b9148
 
 function App() {
   // 지역 선택 및 검색 상태 관리
@@ -31,21 +26,17 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< HEAD
+      {/* Header 컴포넌트에 핸들러 전달 */}
       <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
       <Routes>
+        {/* Main 페이지에 선택된 지역 및 검색어 전달 */}
         <Route
           path="/"
           element={<Main selectedRegion={selectedRegion} searchQuery={searchQuery} />}
         />
         <Route path="/login" element={<Login />} />
         <Route path="/list" element={<List />} />
-=======
-      <Routes>
-        <Route path="/" element={<Main/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
->>>>>>> ce8672e5c552ab7e5a9dccd82a542391759b9148
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
