@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../Auth.css'; // 공통 스타일 파일 추가
 
+
 const Register = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
