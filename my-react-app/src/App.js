@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
-import Main from './components/Main';
+import Main from './pages/Main';
 import Login from './pages/Login';
 import Register from './components/Register';
 import List from './pages/List';
