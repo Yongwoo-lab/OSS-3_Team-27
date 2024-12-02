@@ -27,9 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      {!shouldHideHeader && (
-        <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
-      )}
+      <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
       <Routes>
         <Route
           path="/"
@@ -38,8 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/list" element={<List />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/"element={<Main selectedRegion={selectedRegion} />}
-/>
+        <Route path="/header" element={<Header />} />
       </Routes>
     </div>
   );
