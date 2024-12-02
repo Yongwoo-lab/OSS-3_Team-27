@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ onSearch, onRegionClick }) => {
+const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const regions = [
     { name: '서울', code: 1 },
@@ -21,20 +23,51 @@ const Header = ({ onSearch, onRegionClick }) => {
     onSearch(searchQuery);
   };
 
+  const handleLogoClick = () => {
+    setSearchQuery('');
+    onRegionClick(null);
+    onSearch('');
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   return (
     <header className="header">
-      <div className="logo">레츠고 코리아</div>
+      {/* 로고 */}
+      <div className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+        레츠고 코리아
+      </div>
+
+      {/* 로그인 상태에 따라 버튼 표시 */}
+      <div className="auth-section">
+        {isLoggedIn ? (
+          <div className="user-info">
+            <span>{userName}님</span>
+            <button onClick={onLogout} className="logout-button">로그아웃</button>
+          </div>
+        ) : (
+          <div className="auth-buttons">
+            <button onClick={handleLogin} className="login-button">로그인</button>
+          </div>
+        )}
+      </div>
+
+      {/* 지역 버튼 */}
       <div className="region-buttons">
         {regions.map((region) => (
           <button
             key={region.code}
-            onClick={() => onRegionClick(region.code)} // 지역 코드 전달
+            onClick={() => onRegionClick(region.code)}
             className="region-button"
           >
             {region.name}
           </button>
         ))}
       </div>
+
+      {/* 검색창 */}
       <div className="search-bar">
         <input
           type="text"
