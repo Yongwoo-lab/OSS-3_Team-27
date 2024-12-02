@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Auth.css'; // 공통 스타일 파일 추가
 
@@ -9,6 +9,7 @@ const Register = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // 페이지 이동을 위한 hook
 
   const handleRegister = async () => {
     try {
@@ -35,6 +36,9 @@ const Register = () => {
 
   return (
     <div className="auth-container">
+      <div className="back-box" onClick={() => navigate('/login')}>
+        ←
+      </div>
       <h2>회원가입 페이지</h2>
       <div className="auth-input-group">
         <input

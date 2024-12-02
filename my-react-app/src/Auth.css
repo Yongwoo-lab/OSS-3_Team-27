@@ -63,3 +63,25 @@
   .auth-link:hover {
     text-decoration: underline;
   }
+
+  .back-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #007BFF;
+    border-radius: 8px; /* 네모난 박스 모서리를 약간 둥글게 */
+    font-size: 20px;
+    font-weight: bold;
+    color: #007BFF;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .back-box:hover {
+    background-color: #007BFF;
+    color: #fff;
+    border-color: #0056b3;
+  }
