@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './components/Register';
 import List from './pages/List';
 import Header from './components/Header';
+import MyPage from './pages/MyPage';
 import { useState } from 'react';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [userInfo, setUserInfo] = useState(null); 
 
   const handleRegionClick = (regionCode) => {
     setSelectedRegion(regionCode);
@@ -24,14 +25,14 @@ function App() {
     setSelectedRegion(null);
   };
 
-  const handleLogin = (name) => {
+  const handleLogin = (userData) => {
     setIsLoggedIn(true);
-    setUserName(name);
+    setUserInfo(userData); 
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUserName('');
+    setUserInfo(null);
   };
 
   const hideHeaderRoutes = ['/login', '/register'];
@@ -44,7 +45,7 @@ function App() {
           onRegionClick={handleRegionClick}
           onSearch={handleSearch}
           isLoggedIn={isLoggedIn}
-          userName={userName}
+          userName={userInfo?.User || ''} 
           onLogout={handleLogout}
         />
       )}
@@ -54,9 +55,9 @@ function App() {
           element={<Main selectedRegion={selectedRegion} searchQuery={searchQuery} />}
         />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/list" element={<List />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/header" element={<Header />} />
+        <Route path="/list" element={<List />} />
+        <Route path="/mypage" element={<MyPage userInfo={userInfo} />} /> 
       </Routes>
     </div>
   );

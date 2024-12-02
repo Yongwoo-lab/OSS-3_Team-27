@@ -1,0 +1,80 @@
+.mypage-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    /* background-color: #f9f9f9; */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: large;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start; /* 자식 요소를 왼쪽으로 정렬 */
+    font-size: larger;
+    font-weight: bold;
+    font-family: "Dongle", sans-serif;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    margin-right: 10px;
+    padding: 8px 15px;
+    border: none;
+    background-color: #ffcc00;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Dongle", sans-serif;
+    font-size: larger;
+  }
+  
+  button:hover {
+    background-color: #ffcc00;
+  }
+  
+  .message {
+    color: green;
+    margin-top: 10px;
+  }
+
+  .login-button {
+    background-color: #FFD54F; /* 버튼 노란색 */
+    color: #333;
+    border: 1px solid #FFB300;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1.6rem; /* 크기 조정 */
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Dongle", sans-serif;
+    transition: all 0.3s ease;
+    margin-right: 20px; /* 오른쪽 여백 */
+}
+
+.main-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.main-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}

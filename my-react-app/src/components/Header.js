@@ -59,6 +59,7 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
         {isLoggedIn ? (
           <div className="user-info" style={{fontSize : '30px', fontWeight: 'bold'}}>
             <span>{userName}님  </span>
+            <button onClick={() => navigate('/mypage')} className="login-button">마이페이지</button>
             <button onClick={onLogout} className="login-button">로그아웃</button>
           </div>
         ) : (

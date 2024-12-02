@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Auth.css';
 
@@ -17,7 +17,8 @@ const Login = ({ onLogin }) => {
       const foundUser = users.find(u => u.User === user && u.Password === password);
 
       if (foundUser) {
-        onLogin(foundUser.User); // 사용자 이름 전달
+        onLogin(foundUser);
+        // onLogin(foundUser.User); // 사용자 이름 전달
         alert('로그인 성공!');
         navigate('/');
       } else {
@@ -57,7 +58,8 @@ const Login = ({ onLogin }) => {
       <p className="auth-message">{message}</p>
       <div className="auth-footer">
         <p>계정이 없으신가요?</p>
-        <button onClick={() => navigate('/register')} className="auth-link">회원가입</button>
+        {/* <button onClick={() => navigate('/register')} className="auth-link">회원가입</button> */}
+        <Link to="/register" className="auth-link">회원가입</Link>
       </div>
     </div>
   );
