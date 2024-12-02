@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../Auth.css'; // 공통 스타일 파일 추가
 
+
 const Register = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
@@ -11,6 +12,24 @@ const Register = () => {
   const [message, setMessage] = useState('');
 
   const handleRegister = async () => {
+    // 유효성 체크
+    if (!user.trim()) {
+      setMessage('사용자 이름을 입력해주세요.');
+      return;
+    }
+    if (password.length < 3) {
+      setMessage('비밀번호는 최소 3자 이상이어야 합니다.');
+      return;
+    }
+    if (!/^\d{3}-\d{3,4}-\d{4}$/.test(phone)) {
+      setMessage('전화번호 형식이 올바르지 않습니다. (예: 010-1234-5678)');
+      return;
+    }
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setMessage('유효한 이메일 주소를 입력해주세요.');
+      return;
+    }
+
     try {
       const newUser = {
         User: user,
@@ -26,6 +45,7 @@ const Register = () => {
         setPassword('');
         setPhone('');
         setEmail('');
+        setMessage('');
       }
     } catch (error) {
       console.error('회원가입 중 오류가 발생했습니다.', error);
