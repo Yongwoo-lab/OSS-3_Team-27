@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate 추가
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate(); // useNavigate 초기화
+  const navigate = useNavigate();
 
   const regions = [
     { name: '서울', code: 1 },
@@ -24,14 +24,13 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
   };
 
   const handleLogoClick = () => {
-    // 로고 클릭 시 메인 화면 초기화
     setSearchQuery('');
-    onRegionClick(null); // 지역 초기화
-    onSearch(''); // 검색어 초기화
+    onRegionClick(null);
+    onSearch('');
   };
 
   const handleLogin = () => {
-    navigate('/login'); // /login 경로로 이동
+    navigate('/login');
   };
 
   return (
@@ -60,7 +59,7 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
         {regions.map((region) => (
           <button
             key={region.code}
-            onClick={() => onRegionClick(region.code)} // 지역 코드 전달
+            onClick={() => onRegionClick(region.code)}
             className="region-button"
           >
             {region.name}
