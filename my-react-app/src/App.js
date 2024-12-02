@@ -27,7 +27,10 @@ function App() {
 
   return (
     <div className="App">
-      <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
+      {/* shouldHideHeader가 false일 때만 헤더를 렌더링 */}
+      {!shouldHideHeader && (
+        <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
+      )}
       <Routes>
         <Route
           path="/"
