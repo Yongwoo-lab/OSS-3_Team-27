@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../Auth.css'; // 공통 스타일 파일 추가
+import '../Auth.css';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // 페이지 이동을 위한 hook
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -17,7 +17,9 @@ const Login = () => {
       const foundUser = users.find(u => u.User === user && u.Password === password);
 
       if (foundUser) {
+        onLogin(foundUser.User); // 사용자 이름 전달
         alert('로그인 성공!');
+        navigate('/');
       } else {
         alert('아이디 또는 비밀번호가 잘못되었습니다.');
       }
@@ -55,7 +57,7 @@ const Login = () => {
       <p className="auth-message">{message}</p>
       <div className="auth-footer">
         <p>계정이 없으신가요?</p>
-        <Link to="/register" className="auth-link">회원가입</Link>
+        <button onClick={() => navigate('/register')} className="auth-link">회원가입</button>
       </div>
     </div>
   );

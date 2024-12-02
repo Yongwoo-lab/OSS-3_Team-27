@@ -81,7 +81,7 @@ body {
 }
 
 .search-bar input {
-    flex: 1; /* 검색창 길이 조정 */
+    flex: 0.8; /* 검색창 길이 조정 */
     border: 1px solid #FFB300;
     border-radius: 20px;
     padding: 12px 20px; /* 여백 조정 */

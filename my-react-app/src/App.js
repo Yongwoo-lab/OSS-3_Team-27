@@ -11,6 +11,8 @@ function App() {
   const location = useLocation();
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
 
   const handleRegionClick = (regionCode) => {
     setSelectedRegion(regionCode);
@@ -22,21 +24,36 @@ function App() {
     setSelectedRegion(null);
   };
 
+  const handleLogin = (name) => {
+    setIsLoggedIn(true);
+    setUserName(name);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserName('');
+  };
+
   const hideHeaderRoutes = ['/login', '/register'];
   const shouldHideHeader = hideHeaderRoutes.some((route) => location.pathname.startsWith(route));
 
   return (
     <div className="App">
-      {/* shouldHideHeader가 false일 때만 헤더를 렌더링 */}
       {!shouldHideHeader && (
-        <Header onRegionClick={handleRegionClick} onSearch={handleSearch} />
+        <Header
+          onRegionClick={handleRegionClick}
+          onSearch={handleSearch}
+          isLoggedIn={isLoggedIn}
+          userName={userName}
+          onLogout={handleLogout}
+        />
       )}
       <Routes>
         <Route
           path="/"
           element={<Main selectedRegion={selectedRegion} searchQuery={searchQuery} />}
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/list" element={<List />} />
         <Route path="/register" element={<Register />} />
         <Route path="/header" element={<Header />} />

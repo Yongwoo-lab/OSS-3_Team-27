@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
+import '../Auth.css'
 
 const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,32 +30,11 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
     onSearch('');
   };
 
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
   return (
     <header className="header">
-      {/* 로고 */}
       <div className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
         레츠고 코리아
       </div>
-
-      {/* 로그인 상태에 따라 버튼 표시 */}
-      <div className="auth-section">
-        {isLoggedIn ? (
-          <div className="user-info">
-            <span>{userName}님</span>
-            <button onClick={onLogout} className="logout-button">로그아웃</button>
-          </div>
-        ) : (
-          <div className="auth-buttons">
-            <button onClick={handleLogin} className="login-button">로그인</button>
-          </div>
-        )}
-      </div>
-
-      {/* 지역 버튼 */}
       <div className="region-buttons">
         {regions.map((region) => (
           <button
@@ -66,8 +46,6 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
           </button>
         ))}
       </div>
-
-      {/* 검색창 */}
       <div className="search-bar">
         <input
           type="text"
@@ -76,6 +54,18 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button onClick={handleSearch}>🔍</button>
+      </div>
+      <div className="auth-section">
+        {isLoggedIn ? (
+          <div className="user-info" style={{fontSize : '30px', fontWeight: 'bold'}}>
+            <span>{userName}님  </span>
+            <button onClick={onLogout} className="login-button">로그아웃</button>
+          </div>
+        ) : (
+          <div className="auth-buttons">
+            <button onClick={() => navigate('/login')} className="login-button">로그인</button>
+          </div>
+        )}
       </div>
     </header>
   );
