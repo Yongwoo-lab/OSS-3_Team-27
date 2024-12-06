@@ -16,9 +16,16 @@ const Main = ({ selectedRegion }) => {
 
   useEffect(() => {
     if (selectedRegion) {
-      fetchPlaces(currentPage, sortOrder);
+      // 지역이 변경될 때 페이지 번호를 초기화
+      setCurrentPage(1);
     } else {
       setPlaces([]);
+    }
+  }, [selectedRegion]);
+
+  useEffect(() => {
+    if (selectedRegion) {
+      fetchPlaces(currentPage, sortOrder);
     }
   }, [selectedRegion, currentPage, sortOrder]);
 
@@ -63,7 +70,11 @@ const Main = ({ selectedRegion }) => {
         <>
           <SortButtons sortOrder={sortOrder} onSortChange={setSortOrder} />
           <PlacesList places={places} />
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </>
       )}
     </div>

@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/yongwoo/Desktop/24-2/data-stracture/HW7",
+      "program": "/Users/yongwoo/Desktop/24-2/data-stracture/HW7/build/Debug/outDebug"
+    }
+  ]
+}
