@@ -21,13 +21,15 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
   ];
 
   const handleSearch = () => {
-    onSearch(searchQuery);
+    if (searchQuery.trim() !== '') {
+      navigate('/list', { state: { type: 'search', query: searchQuery } });
+    }
   };
 
   const handleLogoClick = () => {
     setSearchQuery('');
     onRegionClick(null);
-    onSearch('');
+    navigate('/');
   };
 
   return (

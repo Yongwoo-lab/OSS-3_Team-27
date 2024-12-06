@@ -10,19 +10,20 @@ const Main = ({ selectedRegion }) => {
   const [places, setPlaces] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [sortOrder, setSortOrder] = useState('P');
+  const [sortOrder, setSortOrder] = useState('A');
+  const [filterType, setFilterType] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (selectedRegion) {
-      fetchPlaces(currentPage, sortOrder);
+      fetchPlaces(currentPage, sortOrder, filterType);
     } else {
       setPlaces([]);
     }
-  }, [selectedRegion, currentPage, sortOrder]);
+  }, [selectedRegion, currentPage, sortOrder, filterType]);
 
-  const fetchPlaces = async (page, order) => {
+  const fetchPlaces = async (page, order, filter) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -35,7 +36,7 @@ const Main = ({ selectedRegion }) => {
           numOfRows: 10,
           listYN: 'Y',
           arrange: order,
-          contentTypeId: 12,
+          contentTypeId: getContentTypeId(filter),
           areaCode: selectedRegion,
           _type: 'json',
         },
@@ -51,6 +52,13 @@ const Main = ({ selectedRegion }) => {
     }
   };
 
+  const getContentTypeId = (filter) => {
+    if (filter === 'tour') return 12;
+    if (filter === 'stay') return 32;
+    if (filter === 'festival') return 15;
+    return null;
+  };
+
   return (
     <div className="main-container">
       {!selectedRegion ? (
@@ -61,7 +69,12 @@ const Main = ({ selectedRegion }) => {
         <p>{error}</p>
       ) : (
         <>
-          <SortButtons sortOrder={sortOrder} onSortChange={setSortOrder} />
+          <SortButtons
+            sortOrder={sortOrder}
+            filterType={filterType}
+            onSortChange={setSortOrder}
+            onFilterChange={setFilterType}
+          />
           <PlacesList places={places} />
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </>
