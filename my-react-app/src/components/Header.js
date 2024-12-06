@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => {
+const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout, selectedRegion }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
           <button
             key={region.code}
             onClick={() => onRegionClick(region.code)}
-            className="region-button"
+            className={`region-button ${selectedRegion === region.code ? 'active' : ''}`}
           >
             {region.name}
           </button>
@@ -81,4 +81,4 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
   );
 };
 
-export default Header;
+export default Header;  
