@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import Main from './pages/Main';
 import Login from './pages/Login';
@@ -14,10 +14,14 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null); 
+  const navigate = useNavigate();
+
+  
 
   const handleRegionClick = (regionCode) => {
     setSelectedRegion(regionCode);
     setSearchQuery('');
+    navigate('/');
   };
 
   const handleSearch = (query) => {
