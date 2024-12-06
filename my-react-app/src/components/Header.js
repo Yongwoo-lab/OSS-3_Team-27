@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
-import '../Auth.css'
+import '../Auth.css';
 
-const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => {
+const Header = ({ onRegionClick, isLoggedIn, userName, onLogout }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -21,13 +21,15 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
   ];
 
   const handleSearch = () => {
-    onSearch(searchQuery);
+    if (searchQuery.trim() !== '') {
+      navigate('/list', { state: { type: 'search', query: searchQuery } });
+    }
   };
 
   const handleLogoClick = () => {
     setSearchQuery('');
     onRegionClick(null);
-    onSearch('');
+    navigate('/');
   };
 
   return (
@@ -57,7 +59,7 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
       </div>
       <div className="auth-section">
         {isLoggedIn ? (
-          <div className="user-info" style={{fontSize : '30px', fontWeight: 'bold'}}>
+          <div className="user-info" style={{ fontSize: '30px', fontWeight: 'bold' }}>
             <span>{userName}님  </span>
             <button onClick={() => navigate('/mypage')} className="login-button">마이페이지</button>
             <button onClick={onLogout} className="login-button">로그아웃</button>

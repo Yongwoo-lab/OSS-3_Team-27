@@ -1,92 +1,61 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { getWishlist } from '../api/wishlist'; // API 호출 함수
 import './Mypage.css';
 
-const MyPage = ({ userInfo }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [userDetails, setUserDetails] = useState(userInfo || {}); // 초기값 설정
-  const [message, setMessage] = useState('');
+const MyPage = ({ isLoggedIn }) => {
+  const [wishlist, setWishlist] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserDetails((prev) => ({ ...prev, [name]: value }));
-  };
+  useEffect(() => {
+    if (!isLoggedIn) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
 
-  const handleSave = () => {
-    setIsEditing(false);
-    setMessage('정보가 성공적으로 수정되었습니다.');
-  };
+    const fetchWishlist = async () => {
+      try {
+        const data = await getWishlist(); // API로 GET 요청
+        setWishlist(data);
+      } catch (error) {
+        console.error('위시리스트 가져오기 오류:', error);
+        alert('위시리스트를 불러오지 못했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!userInfo) {
+    fetchWishlist();
+  }, [isLoggedIn]);
+
+  if (!isLoggedIn) {
     return (
       <div className="mypage-container">
         <h2>로그인이 필요합니다.</h2>
-        <p>
-          메인 페이지로 돌아가려면{' '}
-          <Link to="/" className="main-link">여기를 클릭하세요.</Link>
-        </p>
       </div>
     );
+  }
+
+  if (loading) {
+    return <p>로딩 중...</p>;
   }
 
   return (
     <div className="mypage-container">
       <h1>마이페이지</h1>
-      {isEditing ? (
-        <div>
-          <div className="mypage-content">
-            <div className="input-group">
-              <label>이름:</label>
-              <input
-                type="text"
-                name="User"
-                value={userDetails.User}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="input-group">
-              <label>이메일:</label>
-              <input
-                type="email"
-                name="Email"
-                value={userDetails.Email || ''}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="input-group">
-              <label>전화번호:</label>
-              <input
-                type="text"
-                name="Phone"
-                value={userDetails.Phone || ''}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="action-buttons">
-            <button onClick={handleSave} className="save-button">저장</button>
-            <button onClick={() => setIsEditing(false)} className="cancel-button">취소</button>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className="mypage-content">
-            <div>
-              <p><strong>이름:</strong> {userDetails.User}</p>
-            </div>
-            <div>
-              <p><strong>이메일:</strong> {userDetails.Email}</p>
-            </div>
-            <div>
-              <p><strong>전화번호:</strong> {userDetails.Phone}</p>
-            </div>
-          </div>
-          <div className="action-buttons">
-            <button onClick={() => setIsEditing(true)} className="login-button">정보 수정</button>
-          </div>
-        </div>
-      )}
-      {message && <p className="message">{message}</p>}
+      <h2>내 위시리스트</h2>
+      <ul className="wishlist">
+        {wishlist.length > 0 ? (
+          wishlist.map((item, index) => (
+            <li key={index} className="wishlist-item">
+              <h3>{item.title}</h3>
+              <p><strong>주소:</strong> {item.address}</p>
+              <p><strong>메모:</strong> {item.memo}</p>
+            </li>
+          ))
+        ) : (
+          <p>위시리스트가 비어 있습니다.</p>
+        )}
+      </ul>
     </div>
   );
 };
