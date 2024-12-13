@@ -19,7 +19,7 @@ const Register = () => {
         Phone: phone,
         Email: email,
       };
-      const response = await axios.post('https://674be82c71933a4e88564820.mockapi.io/User_ID_PW', newUser);
+      const response = await axios.post('https://675caa09fe09df667f6476c0.mockapi.io/users', newUser);
 
       if (response.status === 201) {
         alert('회원가입 성공!');

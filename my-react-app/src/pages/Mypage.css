@@ -1,80 +1,127 @@
 .mypage-container {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    /* background-color: #f9f9f9; */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: large;
-  }
-  
-  .input-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-start; /* 자식 요소를 왼쪽으로 정렬 */
-    font-size: larger;
-    font-weight: bold;
-    font-family: "Dongle", sans-serif;
-  }
-  
-  .input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    margin-right: 10px;
-    padding: 8px 15px;
-    border: none;
-    background-color: #ffcc00;
-    color: black;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: "Dongle", sans-serif;
-    font-size: larger;
-  }
-  
-  button:hover {
-    background-color: #ffcc00;
-  }
-  
-  .message {
-    color: green;
-    margin-top: 10px;
-  }
-
-  .login-button {
-    background-color: #FFD54F; /* 버튼 노란색 */
-    color: #333;
-    border: 1px solid #FFB300;
-    border-radius: 20px;
-    padding: 10px 15px;
-    font-size: 1.6rem; /* 크기 조정 */
-    font-weight: bold;
-    cursor: pointer;
-    font-family: "Dongle", sans-serif;
-    transition: all 0.3s ease;
-    margin-right: 20px; /* 오른쪽 여백 */
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Dongle", sans-serif;
 }
 
-.main-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-  margin-left: 5px;
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 20px;
 }
 
-.main-link:hover {
-  text-decoration: underline;
-  color: #0056b3;
+.user-info-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center; /* 중앙 정렬 */
+}
+
+.user-info-section h2 {
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.user-info p {
+  margin: 10px 0;
+  font-size: 1.4rem;
+}
+
+.edit-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-form button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.edit-form button:hover {
+  background-color: #45a049;
+}
+
+.user-info button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.user-info button:hover {
+  background-color: #45a049;
+}
+
+/* 위시리스트 스타일 */
+.wishlist-section {
+  margin-top: 30px;
+}
+
+.wishlist-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.wishlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.wishlist-table th, .wishlist-table td {
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+.wishlist-table th {
+  background-color: #f0f0f0;
+  font-size: 1.4rem;
+}
+
+.wishlist-table td textarea {
+  width: 100%;
+  height: 80px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.wishlist-table button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #ffcc00;
+  color: black;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.wishlist-table button:hover {
+  background-color: #ffb400;
 }

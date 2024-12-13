@@ -2,55 +2,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@400&display=swap');
 
 body {
-    font-family: "Dongle", sans-serif; /* 기본 폰트 설정 */
+    font-family: "Dongle", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #FFFCF1; /* 부드러운 노란빛 배경 */
+    background-color: #FFFCF1;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    background-color: #FFEB3B; /* 밝은 노란색 헤더 */
+    padding: 10px 20px;
+    background-color: #FFEB3B;
     border-bottom: 2px solid #FBC02D;
-    font-family: "Dongle", sans-serif;
-    height: 80px; /* 헤더 높이 고정 */
+    height: 80px; /* 헤더 높이 최적화 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 */
 }
 
+/* 로고 스타일 */
 .logo {
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #333;
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-    margin-right: 20px; /* 간격 추가 */
-}
-
-/* 로그인 버튼 */
-.auth-section .login-button {
-    background-color: #FFD54F; /* 버튼 노란색 */
-    color: #333;
-    border: 1px solid #FFB300;
-    border-radius: 20px;
-    padding: 10px 15px;
-    font-size: 1.4rem; /* 크기 조정 */
-    font-weight: bold;
+    white-space: nowrap;
     cursor: pointer;
-    font-family: "Dongle", sans-serif;
-    transition: all 0.3s ease;
-    margin-right: 20px; /* 오른쪽 여백 */
+    transition: transform 0.2s ease;
 }
 
-.auth-section .login-button:hover {
-    background-color: #FFB300;
-    color: white;
+.logo:hover {
+    transform: scale(1.1);
+    color: #FF9800;
 }
 
-/* 지역 버튼 */
+/* 지역 버튼 스타일 */
 .region-buttons {
     display: flex;
-    gap: 10px;
+    gap: 8px; /* 버튼 간격 */
+    flex-wrap: wrap; /* 버튼이 많을 경우 줄바꿈 */
 }
 
 .region-button {
@@ -58,34 +46,35 @@ body {
     background-color: #FFE082;
     color: #333;
     border: 1px solid #FFB300;
-    border-radius: 20px;
-    font-size: 1.4rem; /* 버튼 크기 조정 */
+    border-radius: 30px;
+    font-size: 1.3rem;
     font-weight: bold;
     cursor: pointer;
-    font-family: "Dongle", sans-serif;
     transition: all 0.3s ease;
+    font-family: "Dongle", sans-serif;
 }
 
 .region-button:hover {
     background-color: #FFB300;
     color: white;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
-/* 검색창 */
+/* 검색창 스타일 */
 .search-bar {
     display: flex;
     align-items: center;
-    flex: 1; /* 남은 공간 채우기 */
-    margin-left: 20px; /* 왼쪽 여백 */
+    margin: 0 20px;
+    flex: 1;
+    max-width: 400px; /* 검색창 최대 너비 */
 }
 
 .search-bar input {
-    flex: 0.8; /* 검색창 길이 조정 */
+    flex: 1;
     border: 1px solid #FFB300;
-    border-radius: 20px;
-    padding: 12px 20px; /* 여백 조정 */
-    font-size: 1.5rem; /* 폰트 크기 */
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
     font-family: "Dongle", sans-serif;
     outline: none;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
@@ -100,18 +89,47 @@ body {
     background-color: #FFD54F;
     color: #333;
     border: 1px solid #FFB300;
-    border-radius: 20px;
-    padding: 12px 18px;
-    font-size: 1.8rem;
+    border-radius: 30px;
+    padding: 10px 15px;
+    font-size: 1.6rem;
     font-weight: bold;
     cursor: pointer;
-    font-family: "Dongle", sans-serif;
-    margin-left: 10px; /* 간격 추가 */
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-left: 10px;
+    transition: all 0.3s ease;
 }
 
 .search-bar button:hover {
     background-color: #FFB300;
     color: white;
     transform: scale(1.1);
+}
+
+/* 유저 정보 및 로그인 섹션 */
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 버튼 간격 */
+}
+
+.auth-section span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.auth-section .login-button {
+    background-color: #FFD54F;
+    color: #333;
+    border: 1px solid #FFB300;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-section .login-button:hover {
+    background-color: #FFB300;
+    color: white;
 }

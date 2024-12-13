@@ -11,7 +11,7 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get('https://674be82c71933a4e88564820.mockapi.io/User_ID_PW');
+      const response = await axios.get('https://675caa09fe09df667f6476c0.mockapi.io/users');
       const users = response.data;
 
       const foundUser = users.find(u => u.User === user && u.Password === password);
