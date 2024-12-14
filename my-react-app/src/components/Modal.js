@@ -58,6 +58,8 @@ const Modal = ({ isOpen, onClose, data, userInfo = {} }) => {
 
       alert('즐겨찾기에 추가되었습니다!');
       setMemo(''); // 메모 필드 초기화
+      onClose(); 
+
     } catch (error) {
       console.error('즐겨찾기 추가 오류:', error);
       alert('즐겨찾기 추가에 실패했습니다.');

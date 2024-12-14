@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
 import './Main.css';
 
 const PlacesList = ({ places, userInfo }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [favoritePlaces, setFavoritePlaces] = useState([]);
+
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await fetch(
+          `https://675caa09fe09df667f6476c0.mockapi.io/users/${userInfo?.id}`
+        );
+        const userData = await response.json();
+        setFavoritePlaces(userData.Wishlist || []);
+      } catch (error) {
+        console.error('즐겨찾기 가져오기 오류:', error);
+      }
+    };
+
+    if (userInfo?.id) fetchWishlist();
+  }, [userInfo]);
 
   const handleItemClick = (place) => {
-    console.log("Place clicked:", place); // 로그 추가
     setSelectedPlace(place);
     setIsModalOpen(true);
   };
@@ -15,6 +31,33 @@ const PlacesList = ({ places, userInfo }) => {
   const closeModal = () => {
     setSelectedPlace(null);
     setIsModalOpen(false);
+  };
+
+  const isFavorite = (place) =>
+    favoritePlaces.some((fav) => fav.title === place.title);
+
+  const toggleFavorite = async (place) => {
+    try {
+      const updatedFavorites = isFavorite(place)
+        ? favoritePlaces.filter((fav) => fav.title !== place.title)
+        : [...favoritePlaces, {
+            title: place.title,
+            address: `${place.addr1 || '정보 없음'} ${place.addr2 || ''}`,
+            phone: place.tel || '정보 없음',
+          }];
+
+      await fetch(`https://675caa09fe09df667f6476c0.mockapi.io/users/${userInfo?.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ Wishlist: updatedFavorites }),
+      });
+
+      setFavoritePlaces(updatedFavorites);
+      alert(isFavorite(place) ? '즐겨찾기에서 제거되었습니다.' : '즐겨찾기에 추가되었습니다.');
+    } catch (error) {
+      console.error('즐겨찾기 업데이트 오류:', error);
+      alert('즐겨찾기 업데이트에 실패했습니다.');
+    }
   };
 
   if (places.length === 0) {
@@ -31,34 +74,29 @@ const PlacesList = ({ places, userInfo }) => {
             onClick={() => handleItemClick(place)}
           >
             <img
-              src={
-                place.firstimage ||
-                place.firstimage2 ||
-                'https://www.shinsegaegroupnewsroom.com/wp-content/uploads/2022/11/2-%EC%A7%80%EB%A7%88%EC%BC%93_%EB%B3%B8%EB%AC%B8.png'
-              }
+              src={place.firstimage || place.firstimage2 || 'https://via.placeholder.com/150'}
               alt={place.title}
               className="place-image"
             />
             <div className="place-info">
               <h3>{place.title}</h3>
-              <p>
-                <strong>주소:</strong> {place.addr1 || '정보 없음'}
-              </p>
-              <p>
-                <strong>전화번호:</strong> {place.tel || '정보 없음'}
-              </p>
+              <p><strong>주소:</strong> {place.addr1 || '정보 없음'}</p>
+              <p><strong>전화번호:</strong> {place.tel || '정보 없음'}</p>
             </div>
+            <button
+              className={`favorite-button ${isFavorite(place) ? 'filled' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleFavorite(place);
+              }}
+            >
+              {isFavorite(place) ? '★' : '☆'}
+            </button>
           </li>
         ))}
       </ul>
 
-      {/* Modal을 리스트 외부에서 호출 */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        data={selectedPlace}
-        userInfo={userInfo} // 반드시 전달
-      />
+      <Modal isOpen={isModalOpen} onClose={closeModal} data={selectedPlace} userInfo={userInfo} />
     </div>
   );
 };
