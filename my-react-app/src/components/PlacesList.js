@@ -53,7 +53,7 @@ const PlacesList = ({ places, userInfo }) => {
       });
 
       setFavoritePlaces(updatedFavorites);
-      alert(isFavorite(place) ? '즐겨찾기에서 제거되었습니다.' : '즐겨찾기에 추가되었습니다.');
+      // alert(isFavorite(place) ? '즐겨찾기에서 제거되었습니다.' : '즐겨찾기에 추가되었습니다.');
     } catch (error) {
       console.error('즐겨찾기 업데이트 오류:', error);
       alert('즐겨찾기 업데이트에 실패했습니다.');
@@ -86,8 +86,9 @@ const PlacesList = ({ places, userInfo }) => {
             <button
               className={`favorite-button ${isFavorite(place) ? 'filled' : ''}`}
               onClick={(e) => {
-                e.stopPropagation();
-                toggleFavorite(place);
+                e.stopPropagation(); // 부모 요소의 클릭 이벤트 전파 방지
+                handleItemClick(place); // 모달창 열기
+                toggleFavorite(place); // 즐겨찾기 추가/제거 실행
               }}
             >
               {isFavorite(place) ? '★' : '☆'}
