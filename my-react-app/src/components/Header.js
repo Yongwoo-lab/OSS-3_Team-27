@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
-import '../Auth.css'
+import '../Auth.css';
 
-const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => {
+const Header = ({ onRegionClick, isLoggedIn, userName, onLogout }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -16,19 +16,30 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
     { name: '대전', code: 3 },
     { name: '울산', code: 7 },
     { name: '세종', code: 8 },
+    { name: '충남', code: 34 },
+    { name: '충북', code: 33 },
+    { name: '경북', code: 35 },
+    { name: '경남', code: 36 },
+    { name: '전북', code: 37 },
+    { name: '전남', code: 38 },
+    { name: '제주', code: 39 },
     { name: '경기', code: 31 },
     { name: '강원', code: 32 },
   ];
 
+  const handleRegionClick = (regionCode) => {
+    setSearchQuery('');
+    navigate('/', { state: { regionCode } }); // 지역 코드를 메인 페이지로 전달
+  };
+
   const handleSearch = () => {
     if (searchQuery.trim() !== '') {
-      navigate('/list', { state: { type: 'search', query: searchQuery } });
+      navigate('/search', { state: { query: searchQuery } }); // 검색어를 /search에 전달
     }
   };
 
   const handleLogoClick = () => {
     setSearchQuery('');
-    onRegionClick(null);
     navigate('/');
   };
 
@@ -41,7 +52,7 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
         {regions.map((region) => (
           <button
             key={region.code}
-            onClick={() => onRegionClick(region.code)}
+            onClick={() => handleRegionClick(region.code)} // 지역 버튼 클릭 이벤트
             className="region-button"
           >
             {region.name}
@@ -59,7 +70,7 @@ const Header = ({ onSearch, onRegionClick, isLoggedIn, userName, onLogout }) => 
       </div>
       <div className="auth-section">
         {isLoggedIn ? (
-          <div className="user-info" style={{fontSize : '30px', fontWeight: 'bold'}}>
+          <div className="user-info" style={{ fontSize: '30px', fontWeight: 'bold' }}>
             <span>{userName}님  </span>
             <button onClick={() => navigate('/mypage')} className="login-button">마이페이지</button>
             <button onClick={onLogout} className="login-button">로그아웃</button>
