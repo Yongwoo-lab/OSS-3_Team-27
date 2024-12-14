@@ -71,7 +71,7 @@ const PlacesList = ({ places, userInfo }) => {
           <li
             key={place.contentid}
             className="place-item"
-            onClick={() => handleItemClick(place)}
+            // onClick={() => handleItemClick(place)}
           >
             <img
               src={place.firstimage || place.firstimage2 || 'https://via.placeholder.com/150'}
